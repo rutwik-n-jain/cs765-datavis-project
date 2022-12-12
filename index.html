@@ -8,6 +8,8 @@
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
 
+<p> Test </p>
+
 
 <script>
 
@@ -26,12 +28,12 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")");
 
 // Parse the Data
-d3.csv("https://github.com/rutwik-n-jain/cs765-datavis-project/blob/main/trchildnum-summary-format2.csv", function(data) {
+d3.csv("https://raw.githubusercontent.com/rutwik-n-jain/cs765-datavis-project/main/trchildnum-summary-format2.csv", function(data) {
 
-  // List of subgroups = header of the csv files = soil condition here
+  // List of subgroups = header of the csv files = avg time spent per activity here
   var subgroups = data.columns.slice(1)
 
-  // List of groups = species here = value of the first column called group -> I show them on the X axis
+  // List of groups = Trchildnum here = value of the first column called Trchildnum -> I show them on the X axis
   var groups = d3.map(data, function(d){return(d.Trchildnum)}).keys()
 
   // Add X axis
@@ -45,7 +47,7 @@ d3.csv("https://github.com/rutwik-n-jain/cs765-datavis-project/blob/main/trchild
 
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain([0, 60])
+    .domain([0, 1440])
     .range([ height, 0 ]);
   svg.append("g")
     .call(d3.axisLeft(y));
@@ -71,7 +73,7 @@ d3.csv("https://github.com/rutwik-n-jain/cs765-datavis-project/blob/main/trchild
       // enter a second time = loop subgroup per subgroup to add all rectangles
       .data(function(d) { return d; })
       .enter().append("rect")
-        .attr("x", function(d) { return x(d.data.group); })
+        .attr("x", function(d) { return x(d.data.Trchildnum); })
         .attr("y", function(d) { return y(d[1]); })
         .attr("height", function(d) { return y(d[0]) - y(d[1]); })
         .attr("width",x.bandwidth())
