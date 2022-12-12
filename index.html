@@ -26,13 +26,13 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")");
 
 // Parse the Data
-d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv", function(data) {
+d3.csv("https://github.com/rutwik-n-jain/cs765-datavis-project/blob/main/trchildnum-summary-format2.csv", function(data) {
 
   // List of subgroups = header of the csv files = soil condition here
   var subgroups = data.columns.slice(1)
 
   // List of groups = species here = value of the first column called group -> I show them on the X axis
-  var groups = d3.map(data, function(d){return(d.group)}).keys()
+  var groups = d3.map(data, function(d){return(d.Trchildnum)}).keys()
 
   // Add X axis
   var x = d3.scaleBand()
@@ -53,7 +53,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/da
   // color palette = one color per subgroup
   var color = d3.scaleOrdinal()
     .domain(subgroups)
-    .range(['#e41a1c','#377eb8','#4daf4a'])
+    .range(['#8dd3c7','#ffffb3','#bebada','#fb8072'])
 
   //stack the data? --> stack per subgroup
   var stackedData = d3.stack()
